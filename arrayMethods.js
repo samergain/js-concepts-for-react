@@ -48,5 +48,15 @@ let arrayObj = [o1, o2, o3];
 console.log(arrayObj.includes(o2)); //true, while line 27 is false!
 
 ///////////FIND///////////
+//array.find(callback) returns the first element in an array that passes the callback function
+const users = [
+    {id: 1, name: 'Sam', age: 37},
+    {id: 2, name: 'Alex', age: 33},
+    {id: 3, name: 'Jax', age: 45},
+    {id: 4, name: 'Drake', age: 24},
+];
+
+const jax = users.find( user => user.name === 'Jax');
+console.log(jax) //{ id: 3, name: 'Jax', age: 45 }
 
 ///////////REDUCE/////////
