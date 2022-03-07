@@ -59,6 +59,15 @@ const users = [
 const jax = users.find( user => user.name === 'Jax');
 console.log(jax) //{ id: 3, name: 'Jax', age: 45 }
 
+const inventory = [
+    {name: 'apples', quantity: 2},
+    {name: 'bananas', quantity: 0},
+    {name: 'cherries', quantity: 5}
+  ]
+  
+  const resultInInv = inventory.find( ({ name }) => name === 'cherries' )
+  
+  console.log(resultInInv)
 ///////////REDUCE/////////
 //array.reduce(callbackfn(result,currentElement), initialValueOf_result) //if initialValue is not passed, then it's 0
 let array3 = [2, 2, 2, 2, 2];
