@@ -101,7 +101,8 @@ fibo(5);
 
 
 ///////////CLOSURE///////////
-//CLOSURE makes the function able to remember it's previous state (var value)
+//CLOSURE is a function that has access to its own variables and can 'remember' the state of that variable. and it returns a function
+//the cons with closure is that we could get memory leak if we're not careful with the local variable
 //https://stackoverflow.com/questions/7629891/functions-that-return-a-function#7629984
 //https://www.w3schools.com/js/js_function_closures.asp
 
@@ -109,7 +110,7 @@ let getUid = (() => {
     var uid = 0;
     console.log('uid before return', uid)
     console.log('take a break here')
-    return () => ++uid;
+    return () => ++uid; //the returned function has access to local scope of getUid
 })();
 
 let x = getUid;
@@ -117,3 +118,15 @@ console.log(x());
 console.log(x());
 let y = getUid; //y points to the new state of getUid which is 2 at this point in code
 console.log(y()); //returns 3
+
+//example 2:
+function hireDevs() {
+    var name = 'Trio';
+    function displayName() {
+      alert(name);
+    }
+    return displayName;
+  }
+  
+  var myFunc = hireDevs();
+  myFunc();
