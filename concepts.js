@@ -68,7 +68,33 @@ const asyncFetch2 = async () => {
     }
 }
 asyncFetch2();
+
+
 ///////MEMOIZATION///////
-///////CURRYING///////
-///////CLASSES///////
-///////INHERITANCE///////
+//MEMOIZATION is a technique used to store the result of a long calculation (function) in an object so we can use the result instantly without recalculating it in case it occured again in the future
+//example 1:
+const memo = {};
+const add50 = function(num) {
+    if(num in memo){
+        return memo[num]
+    } else {
+        console.log('long calculation is happening...')
+        memo[num] = num + 50;
+        return memo[num]
+    }
+}
+console.log(add50(100));
+console.log(add50(100)); //the second time we need the result of the 100 input, we just get it from the memo without running the 'long calculation'
+console.log(add50(25)); //now memo has: {100: 150, 25: 75}
+//example 2: 
+//in this example we will use memoization with recursion to calculation the fibonacci sequence
+function fibo(num, memo){
+    memo = (memo || {}); //if it has a value from a recursion then equals itself, if it's the first time then equals an empty object
+    console.log('num is:',num,' and memo:',memo)
+    if(num <= 1) { return 1 }
+    if(num in memo) { return memo[num] }
+    else {
+        return memo[num] = fibo(num -1, memo) + fibo(num -2, memo)
+    }
+}
+fibo(5)
