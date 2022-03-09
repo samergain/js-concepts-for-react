@@ -28,7 +28,46 @@ myPromise
 fetch('https://jsonplaceholder.typicode.com/todos/1')
     .then(response => response.json())
     .then( resolvedJson => console.log(resolvedJson))
+
+//example fetch2:
+fetch('https://jsonplaceholder.typicode.com/users')
+    .then(response => response.json())
+    .then(users => {
+        const firstUser = users[0];
+        console.log(firstUser)
+        return fetch('https://jsonplaceholder.typicode.com/posts?userId=' + firstUser.id)
+    })
+    .then(response => response.json())
+    .then(result => console.log(result))
 ///////ASYNC///////
+//Async functions gives a way of handling async processes in a code that looks like synch code using the await keyword.
+// await pauses the execusion of the code until the async process is resolved
+//refactoring example fetch2 using async await:
+const asyncFetch1 = async () => {
+    const getUsers = await fetch('https://jsonplaceholder.typicode.com/users');
+    const users = await getUsers.json();
+    const firstUser = users[0];
+    console.log(firstUser);
+    const getPosts = await fetch('https://jsonplaceholder.typicode.com/posts?userId=' + firstUser.id);
+    const posts = await getPosts.json();
+    console.log(posts)
+}
+asyncFetch1();
+//to handle errors in async functions we wrap our code in a try/catch blocks. Like so:
+const asyncFetch2 = async () => {
+    try{
+        const getUsers = await fetch('https://jso.typicode.com/users');
+        const users = await getUsers.json();
+        const firstUser = users[0];
+        console.log(firstUser);
+        const getPosts = await fetch('https://jsonplaceholder.typicode.com/posts?userId=' + firstUser.id);
+        const posts = await getPosts.json();
+        console.log(posts)
+    } catch(err){
+        console.log('Something went wrong!')
+    }
+}
+asyncFetch2();
 ///////MEMOIZATION///////
 ///////CURRYING///////
 ///////CLASSES///////
