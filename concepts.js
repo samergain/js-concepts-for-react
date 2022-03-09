@@ -97,4 +97,23 @@ function fibo(num, memo){
         return memo[num] = fibo(num -1, memo) + fibo(num -2, memo)
     }
 }
-fibo(5)
+fibo(5);
+
+
+///////////CLOSURE///////////
+//CLOSURE makes the function able to remember it's previous state (var value)
+//https://stackoverflow.com/questions/7629891/functions-that-return-a-function#7629984
+//https://www.w3schools.com/js/js_function_closures.asp
+
+let getUid = (() => {
+    var uid = 0;
+    console.log('uid before return', uid)
+    console.log('take a break here')
+    return () => ++uid;
+})();
+
+let x = getUid;
+console.log(x());
+console.log(x());
+let y = getUid; //y points to the new state of getUid which is 2 at this point in code
+console.log(y()); //returns 3
